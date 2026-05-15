@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setIsAdmin(session?.user?.user_metadata?.role === 'admin');
+      setIsAdmin(session?.user?.app_metadata?.role === 'admin');
       setLoading(false);
     });
 
@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
-      setIsAdmin(session?.user?.user_metadata?.role === 'admin');
+      setIsAdmin(session?.user?.app_metadata?.role === 'admin');
       setLoading(false);
     });
 
