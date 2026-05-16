@@ -32,7 +32,7 @@ const detailedServices = [
       "Concept-through-design-development for residential additions, ADUs, remodels, and small commercial projects.",
     bullets: [
       "Site analysis and feasibility review",
-      "Schematic floor plans and 3D massing",
+      "Schematic floor plans",
       "Design development drawings",
       "Material and finish guidance",
     ],
@@ -42,7 +42,7 @@ const detailedServices = [
     n: "02",
     title: "Permit Set of Blueprints",
     intro:
-      "Complete construction documents engineered to pass Long Beach plan check on the first or second round.",
+      "Complete construction documents engineered to pass plan check on the first or second round.",
     bullets: [
       "Architectural floor, elevation, and section drawings",
       "Site, roof, and demolition plans",
