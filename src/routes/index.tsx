@@ -7,11 +7,11 @@ export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
-      { title: "Proven Design & Consulting — Architectural Design & Permitting in Long Beach, CA" },
+      { title: "Proven Design & Consulting — Architectural Design & Permitting in Long Beach & LA County" },
       {
         name: "description",
         content:
-          "Permit-ready architectural blueprints and full-service city submittals in Long Beach, California. Residential, ADU, and commercial projects.",
+          "Permit-ready architectural blueprints and full-service city submittals across Long Beach and Los Angeles County. Residential, ADU, and commercial projects.",
       },
       { property: "og:title", content: "Proven Design & Consulting — Long Beach, CA" },
       {
@@ -33,13 +33,13 @@ const services = [
   },
   {
     icon: FileText,
-    title: "Permit-Ready Blueprints",
+    title: "Assistance with Pre-Approved Plans",
     desc: "Construction documents with structural details and Title 24 compliance, ready for plan check.",
   },
   {
     icon: Stamp,
     title: "City Submittals",
-    desc: "We handle the Long Beach plan-check process, corrections, and approvals on your behalf.",
+    desc: "We handle the plan check process, corrections and approvals on your behalf.",
   },
 ];
 
@@ -50,14 +50,14 @@ function HomePage() {
       <section className="px-6 pt-20 pb-24">
         <div className="max-w-7xl mx-auto">
           <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Long Beach, California
+            Long Beach &amp; Los Angeles County, California
           </span>
           <h1 className="mt-5 text-4xl md:text-6xl font-semibold tracking-tight text-balance max-w-[22ch]">
             Architectural blueprints designed for city approval.
           </h1>
           <p className="mt-6 text-base md:text-lg text-muted-foreground text-pretty max-w-[58ch] leading-relaxed">
             Proven Design &amp; Consulting bridges architectural vision and municipal requirements —
-            delivering permit-ready design sets and full-service city submittals for the Long Beach community.
+            delivering permit-ready design sets and full-service city submittals across Long Beach and Los Angeles County.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
@@ -124,8 +124,8 @@ function HomePage() {
               {[
                 {
                   n: "01",
-                  t: "Long Beach Specialists",
-                  d: "Deep familiarity with Long Beach Development Services, Specific Plans, and Coastal Zone requirements.",
+                  t: "Long Beach & LA County Specialists",
+                  d: "Deep familiarity with Long Beach Development Services, LA County Building & Safety, Specific Plans, and Coastal Zone requirements.",
                 },
                 {
                   n: "02",
