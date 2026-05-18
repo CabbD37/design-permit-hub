@@ -69,8 +69,8 @@ function ContactPage() {
               {
                 icon: Mail,
                 label: "Email",
-                value: "hello@provendcservices.com",
-                href: "mailto:hello@provendcservices.com",
+                value: "Danny@provendcservices.com",
+                href: "mailto:Danny@provendcservices.com",
               },
               {
                 icon: MapPin,
