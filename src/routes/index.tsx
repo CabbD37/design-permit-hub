@@ -122,7 +122,7 @@ function HomePage() {
             </h2>
             <div className="space-y-7">
               {whyRows.map((row) => (
-                <div key={row.n} className="flex gap-5">
+                <div key={row.key} className="flex gap-5">
                   <div className="shrink-0 text-muted-foreground text-sm font-mono pt-0.5">
                     {row.n}
                   </div>
