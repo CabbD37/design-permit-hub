@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, FileText, Stamp } from "lucide-react";
 import heroStudio from "@/assets/hero-studio.jpg";
 import permitDetail from "@/assets/permit-detail.jpg";
+import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -25,52 +26,49 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const services = [
-  {
-    icon: Compass,
-    title: "Architectural Design",
-    desc: "Concepts, floor plans, and spatial layouts tailored to California coastal density and residential zoning.",
-  },
-  {
-    icon: FileText,
-    title: "Assistance with Pre-Approved Plans",
-    desc: "Construction documents with structural details and Title 24 compliance, ready for plan check.",
-  },
-  {
-    icon: Stamp,
-    title: "City Submittals",
-    desc: "We handle the plan check process, corrections and approvals on your behalf.",
-  },
-];
+const serviceIcons = [Compass, FileText, Stamp];
 
 function HomePage() {
+  const t = useSiteContent();
+
+  const services = [1, 2, 3].map((i) => ({
+    icon: serviceIcons[i - 1],
+    title: t(`home.service_${i}.title`),
+    desc: t(`home.service_${i}.desc`),
+  }));
+
+  const whyRows = [1, 2, 3].map((i) => ({
+    n: `0${i}`,
+    t: t(`home.why_${i}.title`),
+    d: t(`home.why_${i}.desc`),
+  }));
+
   return (
     <>
       {/* Hero */}
       <section className="px-6 pt-20 pb-24">
         <div className="max-w-7xl mx-auto">
           <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Long Beach &amp; Los Angeles County, California
+            {t("home.hero.eyebrow")}
           </span>
           <h1 className="mt-5 text-4xl md:text-6xl font-semibold tracking-tight text-balance max-w-[22ch]">
-            Architectural blueprints designed for city approval.
+            {t("home.hero.title")}
           </h1>
           <p className="mt-6 text-base md:text-lg text-muted-foreground text-pretty max-w-[58ch] leading-relaxed">
-            Proven Design &amp; Consulting bridges architectural vision and municipal requirements —
-            delivering permit-ready design sets and full-service city submittals across Long Beach and Los Angeles County.
+            {t("home.hero.body")}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/services"
               className="inline-flex items-center gap-2 bg-foreground text-background text-sm py-3 px-4 rounded-sm hover:opacity-90 transition-opacity"
             >
-              View Services <ArrowRight className="size-4" />
+              {t("home.hero.cta_primary")} <ArrowRight className="size-4" />
             </Link>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 text-sm py-3 px-4 rounded-sm ring-1 ring-border hover:bg-muted transition-colors"
             >
-              Start a Project
+              {t("home.hero.cta_secondary")}
             </Link>
           </div>
 
@@ -118,26 +116,10 @@ function HomePage() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="flex flex-col gap-8">
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-balance max-w-[24ch]">
-              Local knowledge is the difference between a project and a permit.
+              {t("home.why.title")}
             </h2>
             <div className="space-y-7">
-              {[
-                {
-                  n: "01",
-                  t: "Long Beach & LA County Specialists",
-                  d: "Deep familiarity with Long Beach Development Services, LA County Building & Safety, Specific Plans, and Coastal Zone requirements.",
-                },
-                {
-                  n: "02",
-                  t: "Permit-First Drafting",
-                  d: "Sets are built to be read by plan-checkers, contractors, and inspectors alike — minimizing corrections and field changes.",
-                },
-                {
-                  n: "03",
-                  t: "Full-Service Expediting",
-                  d: "From feasibility review to final approval, we handle the bureaucracy so your construction stays on schedule.",
-                },
-              ].map((row) => (
+              {whyRows.map((row) => (
                 <div key={row.n} className="flex gap-5">
                   <div className="shrink-0 text-muted-foreground text-sm font-mono pt-0.5">
                     {row.n}
@@ -169,9 +151,9 @@ function HomePage() {
       <section className="px-6 mt-24">
         <div className="max-w-7xl mx-auto ring-1 ring-rule rounded-xl p-10 md:p-12 bg-card flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-[44ch]">
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">Start your submittal.</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{t("home.cta.title")}</h2>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Schedule a consultation or send preliminary sketches for a project feasibility review.
+              {t("home.cta.body")}
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -179,13 +161,13 @@ function HomePage() {
               to="/contact"
               className="inline-flex items-center justify-center gap-2 bg-foreground text-background text-sm py-3 px-5 rounded-sm hover:opacity-90"
             >
-              Request Consultation <ArrowRight className="size-4" />
+              {t("home.cta.button")} <ArrowRight className="size-4" />
             </Link>
             <a
-              href="tel:+15625550128"
+              href={t("home.cta.phone_href", "tel:+15625550128")}
               className="inline-flex items-center justify-center text-sm py-3 px-5 rounded-sm ring-1 ring-border hover:bg-muted"
             >
-              (562) 555-0128
+              {t("home.cta.phone")}
             </a>
           </div>
         </div>

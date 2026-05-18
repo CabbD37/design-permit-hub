@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, FileText, Stamp, Check } from "lucide-react";
+import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
@@ -23,62 +24,37 @@ export const Route = createFileRoute("/services")({
   }),
 });
 
-const detailedServices = [
-  {
-    icon: Compass,
-    n: "01",
-    title: "Architectural Design",
-    intro:
-      "Concept-through-design-development for residential additions, ADUs, remodels, and small commercial projects.",
-    bullets: [
-      "Site analysis and feasibility review",
-      "Schematic floor plans",
-      "Design development drawings",
-      "Material and finish guidance",
-    ],
-  },
-  {
-    icon: FileText,
-    n: "02",
-    title: "Permit Set of Blueprints",
-    intro:
-      "Complete construction documents engineered to pass plan check on the first or second round.",
-    bullets: [
-      "Architectural floor, elevation, and section drawings",
-      "Site, roof, and demolition plans",
-      "Title 24 energy compliance documentation",
-      "Coordination with structural, MEP, and Title 24 consultants",
-    ],
-  },
-  {
-    icon: Stamp,
-    n: "03",
-    title: "Permitting & City Submittals",
-    intro:
-      "End-to-end expediting across Los Angeles County and Orange County, focusing in Long Beach and City of LA.",
-    bullets: [
-      "Pre-application meetings and zoning research",
-      "Plan-check submittal and routing",
-      "Corrections and resubmittals",
-      "Final permit issuance and inspection support",
-    ],
-  },
-];
+const icons = [Compass, FileText, Stamp];
 
 function ServicesPage() {
+  const t = useSiteContent();
+
+  const detailedServices = [1, 2, 3].map((i) => ({
+    icon: icons[i - 1],
+    n: `0${i}`,
+    title: t(`services.s${i}.title`),
+    intro: t(`services.s${i}.intro`),
+    bullets: t(`services.s${i}.bullets`).split("|").map((s) => s.trim()).filter(Boolean),
+  }));
+
+  const process = [1, 2, 3, 4].map((i) => ({
+    n: `0${i}`,
+    t: t(`services.process_${i}.title`),
+    d: t(`services.process_${i}.desc`),
+  }));
+
   return (
     <>
       <section className="px-6 pt-20 pb-16">
         <div className="max-w-7xl mx-auto">
           <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Capabilities
+            {t("services.hero.eyebrow")}
           </span>
           <h1 className="mt-5 text-4xl md:text-5xl font-semibold tracking-tight text-balance max-w-[24ch]">
-            Three services. One approval-first process.
+            {t("services.hero.title")}
           </h1>
           <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-[58ch] leading-relaxed">
-            We design, draft, and shepherd projects through the City of Long Beach so construction
-            starts on schedule.
+            {t("services.hero.body")}
           </p>
         </div>
       </section>
@@ -88,9 +64,7 @@ function ServicesPage() {
           {detailedServices.map((s, i) => (
             <article
               key={s.n}
-              className={`grid lg:grid-cols-12 gap-10 py-14 ${
-                i !== 0 ? "border-t border-rule" : ""
-              }`}
+              className={`grid lg:grid-cols-12 gap-10 py-14 ${i !== 0 ? "border-t border-rule" : ""}`}
             >
               <div className="lg:col-span-4 flex flex-col gap-4">
                 <div className="flex items-center gap-3">
@@ -123,15 +97,10 @@ function ServicesPage() {
       <section className="px-6 mt-12 py-20 bg-surface">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-semibold tracking-tight max-w-[28ch]">
-            A clear path from sketch to permit.
+            {t("services.process.title")}
           </h2>
           <div className="mt-12 grid md:grid-cols-4 gap-8">
-            {[
-              { n: "01", t: "Consultation", d: "We review your site, scope, and goals." },
-              { n: "02", t: "Design", d: "Schematic plans and design development." },
-              { n: "03", t: "Permit Set", d: "Construction documents and Title 24." },
-              { n: "04", t: "Submittal", d: "Plan-check, corrections, approval." },
-            ].map((p) => (
+            {process.map((p) => (
               <div key={p.n} className="flex flex-col gap-2">
                 <span className="text-xs font-mono text-muted-foreground">{p.n}</span>
                 <h4 className="font-medium">{p.t}</h4>
@@ -146,10 +115,10 @@ function ServicesPage() {
         <div className="max-w-7xl mx-auto ring-1 ring-rule rounded-xl p-10 md:p-12 bg-card flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-[44ch]">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-              Have a project in mind?
+              {t("services.cta.title")}
             </h2>
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Tell us about your site and timeline. We'll respond within one business day.
+              {t("services.cta.body")}
             </p>
           </div>
           <Link

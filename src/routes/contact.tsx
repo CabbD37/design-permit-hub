@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
+  const t = useSiteContent();
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,13 +46,13 @@ function ContactPage() {
       <section className="px-6 pt-20 pb-12">
         <div className="max-w-7xl mx-auto">
           <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-            Contact
+            {t("contact.hero.eyebrow")}
           </span>
           <h1 className="mt-5 text-4xl md:text-5xl font-semibold tracking-tight text-balance max-w-[22ch]">
-            Let's review your project.
+            {t("contact.hero.title")}
           </h1>
           <p className="mt-5 text-base md:text-lg text-muted-foreground max-w-[58ch] leading-relaxed">
-            Send a few details about your site and goals. We respond within one business day.
+            {t("contact.hero.body")}
           </p>
         </div>
       </section>
@@ -63,19 +65,19 @@ function ContactPage() {
               {
                 icon: Phone,
                 label: "Phone",
-                value: "(562) 555-0128",
-                href: "tel:+15625550128",
+                value: t("contact.phone"),
+                href: t("contact.phone_href", "tel:+15625550128"),
               },
               {
                 icon: Mail,
                 label: "Email",
-                value: "Danny@provendcservices.com",
-                href: "mailto:Danny@provendcservices.com",
+                value: t("contact.email"),
+                href: `mailto:${t("contact.email")}`,
               },
               {
                 icon: MapPin,
                 label: "Office",
-                value: "Long Beach, California",
+                value: t("contact.office"),
               },
             ].map((row) => (
               <div key={row.label} className="flex gap-4">
@@ -102,7 +104,7 @@ function ContactPage() {
                 Service Area
               </div>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-[36ch]">
-                Los Angeles County, Orange County, focusing in Long Beach and City of LA.
+                {t("contact.service_area")}
               </p>
             </div>
 
@@ -111,7 +113,7 @@ function ContactPage() {
                 Hours
               </div>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                Monday–Friday, 9am–6pm PT
+                {t("contact.hours")}
               </p>
             </div>
           </aside>
