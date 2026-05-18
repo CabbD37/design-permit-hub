@@ -32,12 +32,14 @@ function HomePage() {
   const t = useSiteContent();
 
   const services = [1, 2, 3].map((i) => ({
+    key: `service-${i}`,
     icon: serviceIcons[i - 1],
     title: t(`home.service_${i}.title`),
     desc: t(`home.service_${i}.desc`),
   }));
 
   const whyRows = [1, 2, 3].map((i) => ({
+    key: `why-${i}`,
     n: `0${i}`,
     t: t(`home.why_${i}.title`),
     d: t(`home.why_${i}.desc`),
@@ -89,7 +91,7 @@ function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-px bg-rule ring-1 ring-rule rounded-md overflow-hidden">
             {services.map((s) => (
-              <div key={s.title} className="bg-card p-8 flex flex-col gap-4">
+              <div key={s.key} className="bg-card p-8 flex flex-col gap-4">
                 <div className="size-9 bg-muted rounded-sm flex items-center justify-center">
                   <s.icon className="size-4 text-foreground" strokeWidth={1.5} />
                 </div>
@@ -120,7 +122,7 @@ function HomePage() {
             </h2>
             <div className="space-y-7">
               {whyRows.map((row) => (
-                <div key={row.n} className="flex gap-5">
+                <div key={row.key} className="flex gap-5">
                   <div className="shrink-0 text-muted-foreground text-sm font-mono pt-0.5">
                     {row.n}
                   </div>
