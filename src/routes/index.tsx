@@ -91,7 +91,7 @@ function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-px bg-rule ring-1 ring-rule rounded-md overflow-hidden">
             {services.map((s) => (
-              <div key={s.title} className="bg-card p-8 flex flex-col gap-4">
+              <div key={s.key} className="bg-card p-8 flex flex-col gap-4">
                 <div className="size-9 bg-muted rounded-sm flex items-center justify-center">
                   <s.icon className="size-4 text-foreground" strokeWidth={1.5} />
                 </div>
