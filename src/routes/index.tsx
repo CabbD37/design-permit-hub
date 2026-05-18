@@ -32,12 +32,14 @@ function HomePage() {
   const t = useSiteContent();
 
   const services = [1, 2, 3].map((i) => ({
+    key: `service-${i}`,
     icon: serviceIcons[i - 1],
     title: t(`home.service_${i}.title`),
     desc: t(`home.service_${i}.desc`),
   }));
 
   const whyRows = [1, 2, 3].map((i) => ({
+    key: `why-${i}`,
     n: `0${i}`,
     t: t(`home.why_${i}.title`),
     d: t(`home.why_${i}.desc`),
