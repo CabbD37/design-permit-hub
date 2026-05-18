@@ -17,9 +17,8 @@ export function SiteFooter() {
         <div className="flex flex-col gap-3">
           <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Service Area</span>
           <p className="text-sm">
-            Long Beach, Signal Hill, Seal Beach,<br />
-            Belmont Shore, Naples Island,<br />
-            and greater LA County.
+            Los Angeles County, Orange County,<br />
+            focusing in Long Beach and City of LA.
           </p>
         </div>
 
@@ -27,7 +26,7 @@ export function SiteFooter() {
           <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Contact</span>
           <p className="text-sm">
             Long Beach, CA<br />
-            <a href="mailto:hello@provendcservices.com" className="hover:underline">hello@provendcservices.com</a><br />
+            <a href="mailto:Danny@provendcservices.com" className="hover:underline">Danny@provendcservices.com</a><br />
             <a href="tel:+15625550128" className="hover:underline">(562) 555-0128</a>
           </p>
         </div>

@@ -102,8 +102,7 @@ function ContactPage() {
                 Service Area
               </div>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed max-w-[36ch]">
-                Long Beach, Signal Hill, Seal Beach, Belmont Shore, Naples Island, and greater
-                Los Angeles County.
+                Los Angeles County, Orange County, focusing in Long Beach and City of LA.
               </p>
             </div>
 

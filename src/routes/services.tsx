@@ -55,7 +55,7 @@ const detailedServices = [
     n: "03",
     title: "Permitting & City Submittals",
     intro:
-      "End-to-end expediting with the City of Long Beach, Signal Hill, Seal Beach, and surrounding LA County jurisdictions.",
+      "End-to-end expediting across Los Angeles County and Orange County, focusing in Long Beach and City of LA.",
     bullets: [
       "Pre-application meetings and zoning research",
       "Plan-check submittal and routing",
