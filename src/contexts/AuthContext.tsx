@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { Session } from '@supabase/supabase-js';
+import type { Session, User } from '@supabase/supabase-js';
 
 interface AuthContextType {
   session: Session | null;
+  user: User | null;
   loading: boolean;
   isAdmin: boolean;
   signIn: (email: string, password: string) => Promise<void>;
@@ -18,18 +19,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setIsAdmin(session?.user?.app_metadata?.role === 'admin');
+    const checkAdmin = async (userId: string | undefined) => {
+      if (!userId) {
+        setIsAdmin(false);
+        return;
+      }
+      const { data } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .eq('role', 'admin')
+        .maybeSingle();
+      setIsAdmin(!!data);
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, s) => {
+      setSession(s);
       setLoading(false);
+      // Defer Supabase call to avoid deadlock
+      setTimeout(() => checkAdmin(s?.user?.id), 0);
     });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      setIsAdmin(session?.user?.app_metadata?.role === 'admin');
+    supabase.auth.getSession().then(({ data: { session: s } }) => {
+      setSession(s);
       setLoading(false);
+      checkAdmin(s?.user?.id);
     });
 
     return () => subscription?.unsubscribe();
@@ -41,21 +55,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
+    await supabase.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ session, loading, isAdmin, signIn, signOut }}>
+    <AuthContext.Provider value={{ session, user: session?.user ?? null, loading, isAdmin, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
-  return context;
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error('useAuth must be used within AuthProvider');
+  return ctx;
 }
